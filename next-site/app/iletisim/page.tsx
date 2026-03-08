@@ -6,14 +6,14 @@ import { SITE_CONFIG } from "@/lib/content";
 import { getBaseUrl, buildBreadcrumbSchema, buildWebPageSchema } from "@/lib/schema";
 
 const baseUrl = getBaseUrl();
-const title = "İletişim | Uzm. Dr. Doğukan Atabay";
-const description = "Randevu ve iletişim. İmperial Hastanesi Trabzon. Telefon, WhatsApp, adres.";
+const title = "İletişim ve Randevu | Trabzon Varis Tedavisi – Uzm. Dr. Doğukan Atabay";
+const description = "Trabzon İmperial Hastanesi – Ortahisar. Varis ve girişimsel radyoloji randevusu: 0533 948 30 76. WhatsApp ile yazın.";
 
 export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: `${baseUrl}/iletisim` },
-  keywords: ["Doğukan Atabay randevu", "İmperial Hastanesi iletişim", "Trabzon girişimsel radyoloji randevu"],
+  keywords: ["Trabzon varis randevu", "İmperial Hastanesi iletişim Trabzon", "Ortahisar varis tedavisi randevu", "Doğukan Atabay randevu", "Trabzon girişimsel radyoloji randevu"],
   openGraph: {
     url: `${baseUrl}/iletisim`,
     title,

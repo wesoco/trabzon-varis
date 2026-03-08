@@ -13,13 +13,13 @@ const outfit = Outfit({
 });
 
 const baseUrl = getBaseUrl();
-const siteName = "Uzm. Dr. Doğukan Atabay | Girişimsel Radyoloji - Trabzon";
+const siteName = "Trabzon Varis Tedavisi | Ameliyatsız Varis, Tiroid Nodül – Uzm. Dr. Doğukan Atabay";
 const defaultDescription =
-  "Trabzon'da girişimsel radyoloji, ameliyatsız varis ve tiroid nodül tedavisi, biyopsi ve tanı işlemleri. İmperial Hastanesi – randevu ve bilgi.";
+  "Trabzon'da ameliyatsız varis tedavisi, lazer ve köpük skleroterapi, tiroid nodül tedavisi. Uzm. Dr. Doğukan Atabay – Trabzon İmperial Hastanesi. Randevu: 0533 948 30 76.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
-  applicationName: "Uzm. Dr. Doğukan Atabay - Girişimsel Radyoloji Trabzon",
+  applicationName: "Uzm. Dr. Doğukan Atabay - Trabzon Varis Tedavisi | Girişimsel Radyoloji",
   icons: {
     icon: "/favicon.webp",
   },
@@ -29,15 +29,20 @@ export const metadata: Metadata = {
   },
   description: defaultDescription,
   keywords: [
-    "girişimsel radyoloji Trabzon",
     "Trabzon varis tedavisi",
-    "ameliyatsız varis tedavisi",
-    "tiroid nodül tedavisi Trabzon",
-    "lazer varis",
-    "köpük skleroterapi",
+    "Trabzon ameliyatsız varis",
+    "Trabzon varis doktoru",
+    "Trabzon lazer varis",
+    "Trabzon köpük varis",
+    "Trabzon tiroid nodül tedavisi",
+    "Trabzon girişimsel radyoloji",
+    "İmperial Hastanesi Trabzon varis",
+    "Doğukan Atabay Trabzon",
+    "Ortahisar varis tedavisi",
+    "Trabzon Rize Artvin varis tedavisi",
+    "girişimsel radyoloji Trabzon",
+    "köpük skleroterapi Trabzon",
     "biyopsi Trabzon",
-    "Doğukan Atabay",
-    "İmperial Hastanesi Trabzon",
   ],
   openGraph: {
     type: "website",
@@ -62,7 +67,7 @@ export const metadata: Metadata = {
 };
 
 const organizationSchema = buildOrganizationSchema({
-  name: "Uzm. Dr. Doğukan Atabay",
+  name: "Uzm. Dr. Doğukan Atabay - Trabzon Varis Tedavisi",
   phone: SITE_CONFIG.phone,
   email: SITE_CONFIG.email,
   address: SITE_CONFIG.address,

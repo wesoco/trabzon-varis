@@ -12,15 +12,35 @@ export async function generateStaticParams() {
   return SERVICE_SLUGS.map((slug) => ({ slug }));
 }
 
+/** Her hizmet için yerel arama anahtar kelimeleri – Trabzon'da 1. sıra hedefi */
+const SERVICE_KEYWORDS: Record<string, string[]> = {
+  "ameliyatsiz-varis-tedavisi": ["Trabzon varis tedavisi", "Trabzon ameliyatsız varis", "Trabzon varis doktoru", "Ortahisar varis tedavisi", "Trabzon lazer varis", "Trabzon köpük varis", "İmperial Hastanesi varis"],
+  "tiroid-nodul-tedavisi": ["Trabzon tiroid nodül tedavisi", "Trabzon tiroid nodül", "Trabzon ameliyatsız tiroid", "Ortahisar tiroid nodül", "Trabzon MTA tiroid", "İmperial Hastanesi tiroid"],
+  "girisimsel-radyoloji": ["Trabzon girişimsel radyoloji", "Trabzon girişimsel radyoloji uzmanı", "Ortahisar girişimsel radyoloji", "Trabzon biyopsi", "Trabzon port takılması"],
+  "biyopsi": ["Trabzon biyopsi", "Trabzon ince iğne biyopsi", "Trabzon meme biyopsi", "Trabzon tiroid biyopsi", "Ortahisar biyopsi", "İmperial Hastanesi biyopsi"],
+  "lazerle-varis-tedavisi": ["Trabzon lazer varis", "Trabzon EVLA", "Trabzon lazerle varis tedavisi", "Ortahisar lazer varis", "Trabzon endovenöz lazer"],
+  "radyofrekansla-varis-tedavisi": ["Trabzon radyofrekans varis", "Trabzon RFA varis", "Trabzon radyofrekansla varis", "Ortahisar RFA varis"],
+  "kopuk-skleroterapi": ["Trabzon köpük varis", "Trabzon köpük skleroterapi", "Trabzon spider varis", "Ortahisar köpük varis", "Trabzon köpük tedavisi"],
+  "4d-gebe-ultrasonu": ["Trabzon 4D ultrason", "Trabzon gebe ultrasonu", "Trabzon 4 boyutlu ultrason", "Ortahisar 4D ultrason"],
+  "port-takilmasi": ["Trabzon port takılması", "Trabzon port-a-kat", "Trabzon kemoterapi port", "Ortahisar port takılması"],
+  "kist-abse-drenaji": ["Trabzon kist drenajı", "Trabzon abse drenajı", "Trabzon kist abse", "Ortahisar drenaj"],
+  "bilgisayarli-tomografi": ["Trabzon BT", "Trabzon bilgisayarlı tomografi", "Trabzon tomografi", "Ortahisar BT"],
+  "mr-goruntuleme": ["Trabzon MR", "Trabzon MR çekimi", "Trabzon manyetik rezonans", "Ortahisar MR"],
+  "xray-goruntuleme": ["Trabzon röntgen", "Trabzon röntgen çekimi", "Trabzon X-ray", "Ortahisar röntgen"],
+  "mamografi": ["Trabzon mamografi", "Trabzon meme filmi", "Trabzon meme kanseri taraması", "Ortahisar mamografi"],
+};
+
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
   const service = getServiceBySlug(slug);
   if (!service) return { title: "Hizmet" };
   const baseUrl = getBaseUrl();
   const canonical = `${baseUrl}/hizmetler/${slug}`;
+  const keywords = SERVICE_KEYWORDS[slug] ?? ["Trabzon", "İmperial Hastanesi", "Ortahisar"];
   return {
     title: service.title,
     description: service.excerpt,
+    keywords,
     alternates: { canonical },
     openGraph: {
       title: service.title,
@@ -36,22 +56,29 @@ export async function generateMetadata({ params }: Props) {
 
 const SUBHEADING_PREFIXES = [
   "Kimlere uygulanır?",
+  "Kimler için?",
   "İşlem nasıl yapılır?",
+  "Uygulama:",
   "Avantajları:",
+  "Artıları:",
   "Hangi işlemler yapılır?",
   "Hangi bölgelere uygulanır?",
+  "Nereye?",
+  "Kapsam:",
+  "Sonrası:",
+  "Sonrasında nelere dikkat?",
 ];
 
-/** SSS için her zaman 8 soru: önce hizmete özel, eksikse genel sorularla tamamlanır. */
+/** SSS: önce hizmete özel, eksikse genel sorularla 8'e tamamlanır. Özgün ifadeler. */
 const GENERIC_FAQS = [
-  { q: "Randevu nasıl alabilirim?", a: "Telefon veya WhatsApp ile bize ulaşabilir, iletişim sayfamızdaki formu doldurabilirsiniz. En kısa sürede size dönüş yapılacaktır." },
-  { q: "İşlem ücretleri hakkında bilgi alabilir miyim?", a: "Ücretler işleme ve muayeneye göre değişir. Randevu sırasında veya öncesi telefon ile detaylı bilgi alabilirsiniz." },
-  { q: "Sigorta anlaşmalarınız var mı?", a: "Kurumumuzun anlaşmalı olduğu sigortalar ve ödeme seçenekleri hakkında iletişim numaramızdan bilgi alabilirsiniz." },
-  { q: "İşlem öncesi hazırlık gerekir mi?", a: "İşleme göre açlık, ilaç kesimi veya başka hazırlıklar gerekebilir. Randevunuzda size özel talimatlar verilecektir." },
-  { q: "Sonuçları ne zaman alırım?", a: "İşlem türüne göre sonuç süresi değişir. Patoloji veya rapor süreleri randevu sonrası size bildirilir." },
-  { q: "Yanımda refakatçi gerekir mi?", a: "Sedasyon veya genel anestezi uygulanacaksa refakatçi getirmeniz önerilir. Diğer işlemlerde hekiminiz bilgi verecektir." },
-  { q: "Çalışma saatleriniz nedir?", a: "Pazartesi–Cuma 08:00–17:00, Cumartesi 08:00–13:00. Randevu alırken güncel saat bilgisi verilir." },
-  { q: "Nerede hizmet veriyorsunuz?", a: "Kemerkaya, İller Sk. 27-29, İmperial Hastanesi – Ortahisar/Trabzon adresinde hizmet vermekteyiz." },
+  { q: "Trabzon'da varis tedavisi nerede yapılır?", a: "Ortahisar, Kemerkaya İller Sk. 27-29 adresindeki İmperial Hastanesi'nde Uzm. Dr. Doğukan Atabay ameliyatsız varis tedavisi uyguluyor. Randevu: 0533 948 30 76 veya WhatsApp." },
+  { q: "Trabzon'da ameliyatsız varis tedavisi kim yapar?", a: "Girişimsel radyoloji uzmanı Uzm. Dr. Doğukan Atabay, İmperial Hastanesi'nde lazer, köpük ve radyofrekans ile bu tedaviyi gerçekleştiriyor." },
+  { q: "İmperial Hastanesi'nde randevu nasıl alınır?", a: "0533 948 30 76 numarasından veya WhatsApp ile iletişime geçebilir, iletişim sayfamızdaki formu doldurabilirsiniz. Adres: Ortahisar, Kemerkaya İller Sk. 27-29." },
+  { q: "Trabzon'da varis tedavisi ücreti ne kadar?", a: "Ücret muayene ve tedavi kapsamına göre değişir. 0533 948 30 76 veya WhatsApp üzerinden ayrıntılı bilgi alabilirsiniz." },
+  { q: "İşlem öncesi hazırlık gerekir mi?", a: "İşleme göre açlık, ilaç kesimi veya başka hazırlıklar istenebilir. Randevuda size özel talimatlar verilir." },
+  { q: "Sigorta anlaşmalarınız var mı?", a: "Anlaşmalı sigortalar ve ödeme seçenekleri için 0533 948 30 76 numarasından bilgi alabilirsiniz." },
+  { q: "İmperial Hastanesi çalışma saatleri nedir?", a: "Pazartesi–Cuma 08:00–17:00, Cumartesi 08:00–13:00. Pazar kapalı. Güncel saat için randevu sırasında bilgi verilir." },
+  { q: "Trabzon'da girişimsel radyoloji nerede yapılır?", a: "Ortahisar İmperial Hastanesi, Kemerkaya İller Sk. 27-29. Uzm. Dr. Doğukan Atabay varis, tiroid nodül ablasyonu, biyopsi ve port işlemlerini burada uyguluyor. 0533 948 30 76." },
 ];
 
 /** Paragraf "Başlık? Metin" veya "Başlık: Metin" ile başlıyorsa [başlık, metin] döner. */
@@ -88,7 +115,10 @@ export default async function ServiceDetailPage({ params }: Props) {
     { label: service.title },
   ];
   const faqSchema = buildFAQPageSchema(faqList, `${service.title} – Sıkça Sorulan Sorular`);
-  const serviceSchema = buildServiceSchema({ title: service.title, excerpt: service.excerpt, slug });
+  const serviceSchema = buildServiceSchema(
+    { title: service.title, excerpt: service.excerpt, slug },
+    { phone: SITE_CONFIG.phone, address: SITE_CONFIG.address }
+  );
   const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbItems);
 
   return (

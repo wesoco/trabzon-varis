@@ -7,21 +7,22 @@ import { SERVICES } from "@/lib/content";
 import { getBaseUrl, buildBreadcrumbSchema, buildWebPageSchema, buildItemListSchema } from "@/lib/schema";
 
 const baseUrl = getBaseUrl();
-const title = "Hizmetlerimiz | Uzm. Dr. Doğukan Atabay";
-const description = "Girişimsel radyoloji, varis tedavisi, tiroid nodül tedavisi, biyopsi ve tanı işlemleri. Trabzon İmperial Hastanesi.";
+const title = "Trabzon'da Hizmetlerimiz | Ameliyatsız Varis, Tiroid, Girişimsel Radyoloji";
+const description = "Trabzon İmperial Hastanesi'nde ameliyatsız varis tedavisi, tiroid nodül tedavisi, lazer, köpük skleroterapi, biyopsi ve girişimsel radyoloji. Uzm. Dr. Doğukan Atabay.";
 
 export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: `${baseUrl}/hizmetler` },
   keywords: [
-    "girişimsel radyoloji Trabzon",
-    "varis tedavisi Trabzon",
-    "tiroid nodül tedavisi",
-    "biyopsi",
-    "lazer varis",
-    "köpük skleroterapi",
-    "Doğukan Atabay hizmetler",
+    "Trabzon varis tedavisi",
+    "Trabzon ameliyatsız varis",
+    "Trabzon girişimsel radyoloji",
+    "Trabzon tiroid nodül tedavisi",
+    "Trabzon lazer varis",
+    "Trabzon köpük skleroterapi",
+    "İmperial Hastanesi Trabzon hizmetler",
+    "Doğukan Atabay Trabzon",
   ],
   openGraph: {
     url: `${baseUrl}/hizmetler`,

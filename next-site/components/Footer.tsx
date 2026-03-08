@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { SITE_CONFIG } from "@/lib/content";
 
 export function Footer() {
   return (
@@ -59,7 +60,7 @@ export function Footer() {
           <div className="footer-col footer-col-contact">
             <h2 className="footer-col-title">İletişim</h2>
             <p><a href="tel:+905339483076">0533 948 30 76</a></p>
-            <p><a href="mailto:info@dogukanatabay.com">info@dogukanatabay.com</a></p>
+            <p><a href={`mailto:${SITE_CONFIG.email}`}>{SITE_CONFIG.email}</a></p>
             <p>Kemerkaya, İller Sk. 27-29<br />İmperial Hastanesi – Ortahisar/Trabzon</p>
             <p>Pazartesi – Cuma: 08:00 – 17:00<br />Cumartesi: 08:00 – 13:00<br />Pazar: Kapalı</p>
           </div>

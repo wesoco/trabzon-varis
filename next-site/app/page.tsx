@@ -5,7 +5,7 @@ import { ReviewSlider } from "@/components/ReviewSlider";
 import { ServiceCard } from "@/components/ServiceCard";
 import { BlogCard } from "@/components/BlogCard";
 import { ContactForm } from "@/components/ContactForm";
-import { SERVICES, BLOG_POSTS } from "@/lib/content";
+import { SERVICES, BLOG_POSTS, SITE_CONFIG } from "@/lib/content";
 
 const MAPS_EMBED = "https://maps.google.com/maps?q=Kemerkaya,+%C4%B0ller+Sk.+27-29,+%C4%B0mperial+Hastanesi,+Ortahisar,+Trabzon&output=embed";
 
@@ -26,7 +26,7 @@ export default function HomePage() {
                   </svg>
                 </div>
               </div>
-              <p>Muayene ve renkli Doppler ultrason ile değerlendirme sonrası size uygun tedavi yöntemi belirlenir. Lazer, köpük veya radyofrekans ile ameliyatsız, aynı gün taburcu olabileceğiniz işlemler uygulanır.</p>
+              <p>Ortahisar İmperial Hastanesi&apos;nde muayene ve renkli Doppler ultrason değerlendirmesi sonrası sizin için uygun tedavi seçilir. Lazer, köpük veya radyofrekans ile kesisiz, aynı gün taburcu olacağınız işlemler yapılır.</p>
             </div>
             <div className="feature-image" style={{ backgroundImage: "url('/images/laptop_medical.png'), url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&q=80')" }} />
           </div>
@@ -54,8 +54,8 @@ export default function HomePage() {
           </div>
           <div className="about-content">
             <h2 className="about-name">Uzm. Dr. Doğukan Atabay</h2>
-            <p className="about-subtitle">Girişimsel Radyoloji Uzmanı</p>
-            <p>1985 yılında Iğdır&apos;da dünyaya geldim. İlköğretim ve lise eğitimimi Iğdır&apos;da tamamladım. 2003 yılında Atatürk Üniversitesi Tıp Fakültesi&apos;nde başladığım lisans eğitimimden 2009 yılında Tıp Hekimi olarak mezun oldum. 2010-2015 yılları arasında Karadeniz Teknik Üniversitesi Tıp Fakültesi Radyoloji A.D.&apos;da Radyoloji ihtisasımı yaptım. Tez döneminde Endovasküler yolla Tedavi Edilmiş serebral Anevrizmaların orta uzun dönem takip sonuçlarını araştırdım.</p>
+            <p className="about-subtitle">Girişimsel Radyoloji Uzmanı – Trabzon</p>
+            <p>Ortahisar İmperial Hastanesi&apos;nde ameliyatsız varis tedavisi ve girişimsel radyoloji hizmeti veriyorum. 1985&apos;te Iğdır&apos;da doğdum. İlköğretim ve lise eğitimimi Iğdır&apos;da tamamladım. 2003 yılında Atatürk Üniversitesi Tıp Fakültesi&apos;nde başladığım lisans eğitimimden 2009 yılında Tıp Hekimi olarak mezun oldum. 2010-2015 yılları arasında Karadeniz Teknik Üniversitesi Tıp Fakültesi Radyoloji A.D.&apos;da Radyoloji ihtisasımı yaptım. Tez döneminde Endovasküler yolla Tedavi Edilmiş serebral Anevrizmaların orta uzun dönem takip sonuçlarını araştırdım.</p>
             <p>Devlet hizmet yükümlülüğümü Trabzon Kanuni Eğitim ve Araştırma Hastanesinde 2015-2020 yılları arasında uzman hekim olarak tamamladım. İhtisasım sırasında temel ve ileri girişimsel radyoloji kurslarını başarıyla tamamlayıp girişimsel radyoloji diplomasını aldım. Hem ihtisasım hem de zorunlu hizmetimi yaptığım Kanuni Eğitim ve Araştırma Hastanesi&apos;nde girişimsel radyolojik işlemlere ağırlık vererek çalışmalarımı sürdürdüm.</p>
             <p>Türk Tabipler Birliği, Türk Radyoloji Derneği ve Türk Girişimsel Radyoloji Derneği&apos;ne üyeyim.</p>
             <div className="about-badges">
@@ -71,8 +71,8 @@ export default function HomePage() {
       <section className="section services-section" id="hizmetlerimiz">
         <header className="services-section-header">
           <span className="services-section-label">Ne Sunuyoruz</span>
-          <h2 className="services-section-title">Hizmetlerimiz</h2>
-          <p className="services-section-desc">Girişimsel radyoloji, varis tedavisi ve tanı işlemlerinde uzman kadromuzla yanınızdayız.</p>
+          <h2 className="services-section-title">Trabzon&apos;da Hizmetlerimiz</h2>
+          <p className="services-section-desc">Varis, tiroid nodül ve girişimsel radyoloji işlemlerinde uzman kadromuzla Ortahisar İmperial Hastanesi&apos;nde yanınızdayız.</p>
           <div className="services-section-line" aria-hidden="true" />
         </header>
         <div className="services-grid">
@@ -83,7 +83,7 @@ export default function HomePage() {
         <div className="cta-card">
           <div className="cta-card-inner">
             <h2 className="cta-title">Randevu almak veya aklınıza takılanları sormak ister misiniz?</h2>
-            <p className="cta-desc">Varis, girişimsel radyoloji ve tanı işlemleriyle ilgili sorularınız için buradayız.</p>
+            <p className="cta-desc">Varis, girişimsel radyoloji ve tanı işlemleriyle ilgili sorularınız için Ortahisar İmperial Hastanesi&apos;nde yanınızdayız.</p>
             <div className="cta-buttons">
               <a href="tel:+905339483076" className="btn btn-primary cta-btn">Hemen ara</a>
               <a href="https://wa.me/905339483076" className="btn cta-btn cta-btn-outline" target="_blank" rel="noopener noreferrer">WhatsApp ile yaz</a>
@@ -99,7 +99,7 @@ export default function HomePage() {
         <header className="services-section-header">
           <span className="services-section-label">Yazılar</span>
           <h2 className="services-section-title">Blog</h2>
-          <p className="services-section-desc">Varis, girişimsel radyoloji ve sağlık üzerine güncel yazılar.</p>
+          <p className="services-section-desc">Ameliyatsız varis, girişimsel radyoloji ve sağlık üzerine güncel yazılar.</p>
           <div className="services-section-line" aria-hidden="true" />
         </header>
         <div className="blog-grid">
@@ -142,7 +142,7 @@ export default function HomePage() {
                 </span>
                 <div className="contact-info-content">
                   <span className="contact-info-label">E-posta</span>
-                  <a href="mailto:info@dogukanatabay.com" className="contact-info-value">info@dogukanatabay.com</a>
+                  <a href={`mailto:${SITE_CONFIG.email}`} className="contact-info-value">{SITE_CONFIG.email}</a>
                 </div>
               </li>
               <li className="contact-info-item">

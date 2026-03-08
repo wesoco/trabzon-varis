@@ -12,6 +12,51 @@ export async function generateStaticParams() {
   return BLOG_SLUGS.map((slug) => ({ slug }));
 }
 
+/** Önemli blog yazıları için sayfa bazlı keywords (Trabzon yerel SEO) */
+const BLOG_KEYWORDS: Record<string, string[]> = {
+  "ameliyatsiz-varis-tedavisi-nasil-yapilir": ["Trabzon varis tedavisi", "Trabzon ameliyatsız varis", "Trabzon lazer varis", "Trabzon köpük varis", "Trabzon radyofrekans varis", "Ortahisar varis", "İmperial Hastanesi varis"],
+  "tiroid-nodulu-tedavisi": ["Trabzon tiroid nodül", "Trabzon MTA tiroid", "Trabzon ameliyatsız tiroid", "Ortahisar tiroid nodül", "İmperial Hastanesi tiroid"],
+  "girisimsel-radyoloji-islemleri": ["Trabzon girişimsel radyoloji", "Trabzon biyopsi", "Trabzon varis tedavisi", "Trabzon port takılması", "Ortahisar girişimsel radyoloji"],
+  "biyopsi-oncesi-sonrasi": ["Trabzon biyopsi", "ince iğne biyopsi", "biyopsi öncesi", "biyopsi sonrası", "Trabzon patoloji"],
+  "kopuk-skleroterapi-rehberi": ["Trabzon köpük varis", "Trabzon köpük skleroterapi", "Trabzon spider varis", "Ortahisar köpük varis"],
+  "4d-ultrason-bebek": ["Trabzon 4D ultrason", "Trabzon gebe ultrasonu", "4D ultrason gebelik", "Trabzon 4 boyutlu ultrason"],
+  "port-takilmasi-kemoterapi": ["Trabzon port takılması", "port-a-kat", "Trabzon kemoterapi port", "Ortahisar port"],
+  "trabzon-varis-tedavisi-fiyatlari": ["Trabzon varis tedavisi fiyat", "Trabzon varis ücreti", "Trabzon ameliyatsız varis fiyat", "İmperial Hastanesi varis fiyat"],
+  "tiroid-nodulu-kac-cm-tehlikeli": ["Trabzon tiroid nodül", "tiroid nodül boyutu", "tiroid nodül tehlikeli mi", "Trabzon tiroid"],
+  "gebelikte-varis": ["Trabzon gebelikte varis", "gebe varis tedavisi", "Trabzon varis", "hamilelikte varis"],
+  "evla-lazer-endovenoz": ["Trabzon EVLA", "Trabzon lazer varis", "endovenöz lazer", "Trabzon lazer varis tedavisi"],
+  "rfa-radyofrekans-ablasyon": ["Trabzon RFA varis", "Trabzon radyofrekans varis", "RFA varis tedavisi", "Trabzon radyofrekans"],
+  "girisimsel-radyoloji-trabzon": ["Trabzon girişimsel radyoloji", "Trabzon girişimsel radyoloji uzmanı", "Ortahisar girişimsel radyoloji", "İmperial Hastanesi radyoloji"],
+  "mikrodalga-ablasyon-fiyat": ["Trabzon MTA fiyat", "tiroid nodül ablasyon fiyat", "Trabzon mikrodalga ablasyon", "Trabzon tiroid tedavisi fiyat"],
+  "varis-tedavisi-sigorta": ["Trabzon varis sigorta", "varis tedavisi SGK", "Trabzon varis ücret", "İmperial Hastanesi sigorta"],
+};
+
+/** Kategori ve slug'dan sayfa bazlı keywords üretir (liste yoksa) */
+function getBlogKeywords(post: { title: string; category: string; slug: string }): string[] {
+  const exact = BLOG_KEYWORDS[post.slug];
+  if (exact?.length) return exact;
+  const base = ["Trabzon", "Ortahisar", "İmperial Hastanesi", "Doğukan Atabay"];
+  const byCategory: Record<string, string[]> = {
+    Varis: ["Trabzon varis", "Trabzon varis tedavisi", "Trabzon ameliyatsız varis"],
+    Tiroid: ["Trabzon tiroid", "Trabzon tiroid nodül", "Trabzon MTA tiroid"],
+    Radyoloji: ["Trabzon girişimsel radyoloji", "Trabzon radyoloji"],
+    Tanı: ["Trabzon biyopsi", "Trabzon tanı", "Trabzon patoloji"],
+    Ultrason: ["Trabzon ultrason", "Trabzon 4D ultrason", "Trabzon gebe ultrasonu"],
+    Girişimsel: ["Trabzon girişimsel radyoloji", "Trabzon port", "Trabzon biyopsi"],
+  };
+  const fromCat = byCategory[post.category] ?? [];
+  const fromSlug =
+    post.slug.includes("varis") ? ["Trabzon varis", "Trabzon varis tedavisi"] :
+    post.slug.includes("tiroid") ? ["Trabzon tiroid", "Trabzon tiroid nodül"] :
+    post.slug.includes("biyopsi") ? ["Trabzon biyopsi"] :
+    post.slug.includes("port") ? ["Trabzon port takılması"] :
+    post.slug.includes("drenaj") || post.slug.includes("kist") ? ["Trabzon kist drenajı", "Trabzon abse drenajı"] :
+    post.slug.includes("mamografi") ? ["Trabzon mamografi"] :
+    post.slug.includes("mr-") || post.slug.includes("bt-") ? ["Trabzon MR", "Trabzon BT"] :
+    [];
+  return [...new Set([...fromCat, ...fromSlug, ...base])].slice(0, 18);
+}
+
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
   const post = getBlogPostBySlug(slug);
@@ -19,9 +64,11 @@ export async function generateMetadata({ params }: Props) {
   const baseUrl = getBaseUrl();
   const canonical = `${baseUrl}/blog/${slug}`;
   const imageUrl = post.image ? `${baseUrl}${post.image}` : `${baseUrl}/blog-banner.webp`;
+  const keywords = getBlogKeywords(post);
   return {
     title: post.title,
     description: post.excerpt,
+    keywords,
     alternates: { canonical },
     openGraph: {
       title: post.title,
@@ -37,16 +84,16 @@ export async function generateMetadata({ params }: Props) {
   };
 }
 
-/** Blog SSS: 8 soru, tüm yazılarda aynı (okur / randevu odaklı). */
+/** Blog SSS: 8 soru, özgün ifadeler. */
 const BLOG_FAQS = [
-  { q: "Bu konuda randevu alabilir miyim?", a: "Evet. Yazıda bahsedilen işlemler veya benzer konularda randevu ve bilgi için bizi arayabilir veya iletişim formunu kullanabilirsiniz." },
-  { q: "Yazıdaki bilgiler güncel mi?", a: "Blog yazılarımız genel bilgilendirme amaçlıdır. Kişiye özel tanı ve tedavi için mutlaka muayene ve görüntüleme ile değerlendirme gerekir." },
-  { q: "Randevu nasıl alırım?", a: "Telefon veya WhatsApp ile bize ulaşabilir, iletişim sayfamızdaki formu doldurabilirsiniz. En kısa sürede size dönüş yapılacaktır." },
-  { q: "Ücretler hakkında bilgi alabilir miyim?", a: "İşlem ve muayene ücretleri hakkında randevu sırasında veya öncesi telefon ile detaylı bilgi alabilirsiniz." },
-  { q: "Sigorta anlaşmalarınız var mı?", a: "Kurumumuzun anlaşmalı olduğu sigortalar ve ödeme seçenekleri hakkında iletişim numaramızdan bilgi alabilirsiniz." },
-  { q: "İşlem öncesi hazırlık gerekir mi?", a: "İşleme göre açlık, ilaç kesimi veya başka hazırlıklar gerekebilir. Randevunuzda size özel talimatlar verilecektir." },
-  { q: "Çalışma saatleriniz nedir?", a: "Pazartesi–Cuma 08:00–17:00, Cumartesi 08:00–13:00. Randevu alırken güncel saat bilgisi verilir." },
-  { q: "Nerede hizmet veriyorsunuz?", a: "Kemerkaya, İller Sk. 27-29, İmperial Hastanesi – Ortahisar/Trabzon adresinde hizmet vermekteyiz." },
+  { q: "Trabzon'da bu tedavi nerede yapılır?", a: "Yazıda geçen işlemler Ortahisar İmperial Hastanesi (Kemerkaya İller Sk. 27-29) adresinde Uzm. Dr. Doğukan Atabay tarafından uygulanıyor. Randevu: 0533 948 30 76." },
+  { q: "Bu konuda randevu alabilir miyim?", a: "Evet. Varis, tiroid nodül, biyopsi ve girişimsel radyoloji için 0533 948 30 76 veya WhatsApp ile İmperial Hastanesi'nden randevu alabilirsiniz." },
+  { q: "Yazıdaki bilgiler güncel mi?", a: "Yazılar genel bilgilendirme içindir. Kişiye özel tanı ve tedavi muayene ve görüntüleme ile belirlenir." },
+  { q: "Trabzon'da randevu nasıl alınır?", a: "0533 948 30 76 veya WhatsApp ile arayabilir, iletişim sayfamızdaki formu kullanabilirsiniz. Adres: Ortahisar, Trabzon." },
+  { q: "Trabzon'da varis tedavisi ücreti ne kadar?", a: "Ücretler tedavi kapsamına göre değişir. Ayrıntı için 0533 948 30 76 numarasından bilgi alabilirsiniz." },
+  { q: "Sigorta anlaşmalarınız var mı?", a: "Anlaşmalı sigortalar ve ödeme seçenekleri için 0533 948 30 76 numarasından bilgi alabilirsiniz." },
+  { q: "İmperial Hastanesi çalışma saatleri nedir?", a: "Pazartesi–Cuma 08:00–17:00, Cumartesi 08:00–13:00. Pazar kapalı." },
+  { q: "Trabzon'da girişimsel radyoloji nerede?", a: "Ortahisar, Kemerkaya İller Sk. 27-29, İmperial Hastanesi. Uzm. Dr. Doğukan Atabay varis, tiroid nodül, biyopsi ve port işlemlerini burada uyguluyor. 0533 948 30 76." },
 ];
 
 export default async function BlogDetailPage({ params }: Props) {

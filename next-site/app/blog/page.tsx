@@ -7,8 +7,8 @@ import { BLOG_POSTS } from "@/lib/content";
 import { getBaseUrl, buildBreadcrumbSchema, buildWebPageSchema, buildItemListSchema } from "@/lib/schema";
 
 const baseUrl = getBaseUrl();
-const title = "Blog | Uzm. Dr. Doğukan Atabay";
-const description = "Varis, girişimsel radyoloji ve sağlık üzerine güncel yazılar. Trabzon.";
+const title = "Trabzon Varis ve Sağlık Blog | Uzm. Dr. Doğukan Atabay";
+const description = "Trabzon varis tedavisi, ameliyatsız varis, tiroid nodül ve girişimsel radyoloji üzerine güncel yazılar. Trabzon İmperial Hastanesi.";
 
 const POSTS_PER_PAGE = 12;
 const CATEGORIES = Array.from(new Set(BLOG_POSTS.map((p) => p.category))).sort();
@@ -18,11 +18,12 @@ export const metadata: Metadata = {
   description,
   alternates: { canonical: `${baseUrl}/blog` },
   keywords: [
-    "varis blog",
-    "girişimsel radyoloji yazıları",
-    "tiroid nodülü",
+    "Trabzon varis tedavisi blog",
+    "Trabzon ameliyatsız varis yazıları",
+    "girişimsel radyoloji Trabzon",
+    "tiroid nodülü Trabzon",
     "biyopsi rehberi",
-    "Doğukan Atabay blog",
+    "Doğukan Atabay blog Trabzon",
   ],
   openGraph: {
     url: `${baseUrl}/blog`,

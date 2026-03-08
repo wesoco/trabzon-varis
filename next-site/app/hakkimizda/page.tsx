@@ -5,14 +5,14 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { getBaseUrl, buildBreadcrumbSchema, buildWebPageSchema } from "@/lib/schema";
 
 const baseUrl = getBaseUrl();
-const title = "Hakkımızda | Uzm. Dr. Doğukan Atabay";
-const description = "Uzm. Dr. Doğukan Atabay - Girişimsel Radyoloji Uzmanı, eğitim ve deneyim. Trabzon İmperial Hastanesi.";
+const title = "Trabzon Varis Doktoru | Uzm. Dr. Doğukan Atabay – Girişimsel Radyoloji";
+const description = "Trabzon'da ameliyatsız varis ve tiroid nodül tedavisi. Uzm. Dr. Doğukan Atabay – Trabzon İmperial Hastanesi, Ortahisar. KTÜ Radyoloji ihtisası.";
 
 export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: `${baseUrl}/hakkimizda` },
-  keywords: ["Doğukan Atabay", "girişimsel radyoloji uzmanı Trabzon", "İmperial Hastanesi", "hakkımızda"],
+  keywords: ["Trabzon varis doktoru", "Doğukan Atabay Trabzon", "girişimsel radyoloji uzmanı Trabzon", "İmperial Hastanesi Trabzon", "Trabzon ameliyatsız varis", "hakkımızda"],
   openGraph: {
     url: `${baseUrl}/hakkimizda`,
     title,
@@ -53,7 +53,7 @@ export default function HakkimizdaPage() {
             <header className="services-section-header services-section-header--on-banner">
               <span className="services-section-label">Biz kimiz</span>
               <h1 className="services-section-title">Hakkımızda</h1>
-              <p className="services-section-desc">Uzm. Dr. Doğukan Atabay — Girişimsel Radyoloji Uzmanı.</p>
+              <p className="services-section-desc">Ameliyatsız varis ve tiroid nodül tedavisi — Uzm. Dr. Doğukan Atabay, Girişimsel Radyoloji Uzmanı, Ortahisar İmperial Hastanesi.</p>
               <div className="services-section-line" aria-hidden="true" />
             </header>
             <Breadcrumb items={breadcrumbItems} />
@@ -92,7 +92,7 @@ export default function HakkimizdaPage() {
               <p className="about-subtitle">Girişimsel Radyoloji Uzmanı</p>
               <p>1985 yılında Iğdır&apos;da dünyaya geldim. İlköğretim ve lise eğitimimi Iğdır&apos;da tamamladım. 2003 yılında Atatürk Üniversitesi Tıp Fakültesi&apos;nde başladığım lisans eğitimimden 2009 yılında Tıp Hekimi olarak mezun oldum. 2010-2015 yılları arasında Karadeniz Teknik Üniversitesi Tıp Fakültesi Radyoloji A.D.&apos;da Radyoloji ihtisasımı yaptım. Tez döneminde Endovasküler yolla Tedavi Edilmiş serebral Anevrizmaların orta uzun dönem takip sonuçlarını araştırdım.</p>
               <p>Devlet hizmet yükümlülüğümü Trabzon Kanuni Eğitim ve Araştırma Hastanesinde 2015-2020 yılları arasında uzman hekim olarak tamamladım. İhtisasım sırasında temel ve ileri girişimsel radyoloji kurslarını başarıyla tamamlayıp girişimsel radyoloji diplomasını aldım. Hem ihtisasım hem de zorunlu hizmetimi yaptığım Kanuni Eğitim ve Araştırma Hastanesi&apos;nde girişimsel radyolojik işlemlere ağırlık vererek çalışmalarımı sürdürdüm.</p>
-              <p>Türk Tabipler Birliği, Türk Radyoloji Derneği ve Türk Girişimsel Radyoloji Derneği&apos;ne üyeyim. Günümüzde İmperial Hastanesi – Trabzon&apos;da girişimsel radyoloji, ameliyatsız varis ve tiroid nodül tedavisi ile tanı işlemlerinde hasta kabulü yapmaktayım.</p>
+              <p>Türk Tabipler Birliği, Türk Radyoloji Derneği ve Türk Girişimsel Radyoloji Derneği&apos;ne üyeyim. Şu an Ortahisar&apos;daki İmperial Hastanesi&apos;nde girişimsel radyoloji, ameliyatsız varis ve tiroid nodül tedavisi ile tanı işlemlerinde hasta kabulü yapıyorum.</p>
               <div className="about-badges">
                 <span className="badge">Trabzon Tabip Odası</span>
                 <span className="badge">Türk Radyoloji Derneği</span>
@@ -107,7 +107,7 @@ export default function HakkimizdaPage() {
             <div className="hospital-card-header">
               <span className="hospital-card-label">Çalıştığımız kurum</span>
               <h2 id="hospital-card-title" className="hospital-card-title">Özel İmperial Hastanesi</h2>
-              <p className="hospital-card-lead">2007&apos;den bu yana Trabzon&apos;da hizmet veren Özel İmperial Hastanesi, Karadeniz Bölgesi&apos;nin önde gelen sağlık kuruluşlarından biridir. Uzman hekim kadrosu ve son teknoloji tanı–tedavi üniteleriyle 7/24 kesintisiz sağlık hizmeti sunmaktadır. Hastanemizde 30&apos;dan fazla tıbbi bölüm, modern ameliyathaneler, uzman anestezi ekibi ve kesintisiz acil servis bulunmaktadır. Online randevu ve e-sonuç imkânlarıyla hasta odaklı hizmet anlayışıyla çalışan İmperial Hastanesi, cerrahi, dahiliye, radyoloji ve girişimsel radyoloji dahil geniş bir yelpazede hizmet vermektedir.</p>
+              <p className="hospital-card-lead">2007&apos;den beri Ortahisar, Trabzon&apos;da hizmet veren Özel İmperial Hastanesi, Karadeniz&apos;in önde gelen sağlık kuruluşlarından biridir. Uzman kadro ve güncel tanı–tedavi üniteleriyle kesintisiz sağlık hizmeti sunar. 30&apos;u aşkın tıbbi bölüm, modern ameliyathaneler, anestezi ekibi ve acil servis mevcuttur. Online randevu ve e-sonuç imkânlarıyla hasta odaklı çalışan hastanede cerrahi, dahiliye, radyoloji ve girişimsel radyoloji başta olmak üzere geniş bir yelpazede hizmet verilmektedir.</p>
             </div>
             <div className="hospital-card-grid">
               <div className="hospital-card-block hospital-card-block--contact">
@@ -198,7 +198,7 @@ export default function HakkimizdaPage() {
               </div>
               <div className="hospital-card-block hospital-card-block--departments">
                 <h3 className="hospital-card-block-title">Bölümlerden bazıları</h3>
-                <p className="hospital-card-deps-intro">Hastanemizde cerrahi, dahiliye ve tanı birimleriyle kapsamlı hizmet sunulmaktadır.</p>
+                <p className="hospital-card-deps-intro">Hastanemizde cerrahi, dahiliye ve tanı birimleriyle kapsamlı hizmet sunuluyor.</p>
                 <div className="hospital-departments-tags">
                   <span className="hospital-dep-tag">Beyin ve Sinir Cerrahisi</span>
                   <span className="hospital-dep-tag">Genel Cerrahi</span>

@@ -4,10 +4,11 @@
  * https://developers.google.com/search/docs/appearance/structured-data
  */
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://dogukanatabay.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "";
 
 export function getBaseUrl() {
-  return SITE_URL.replace(/\/$/, "");
+  const base = (SITE_URL || "").replace(/\/$/, "");
+  return base || (typeof window !== "undefined" ? window.location.origin : "https://example.com");
 }
 
 type FaqItem = { q: string; a: string };
@@ -61,11 +62,13 @@ export function buildOrganizationSchema(config: {
           latitude: 41.0027,
           longitude: 39.7312,
         },
-        areaServed: {
-          "@type": "City",
-          name: "Trabzon",
-          containedInPlace: { "@type": "AdministrativeArea", name: "Trabzon", addressCountry: "TR" },
-        },
+        areaServed: [
+          { "@type": "City", name: "Trabzon", containedInPlace: { "@type": "AdministrativeArea", name: "Trabzon", addressCountry: "TR" } },
+          { "@type": "City", name: "Rize", addressCountry: "TR" },
+          { "@type": "City", name: "Artvin", addressCountry: "TR" },
+          { "@type": "City", name: "Gümüşhane", addressCountry: "TR" },
+          { "@type": "City", name: "Bayburt", addressCountry: "TR" },
+        ],
         openingHoursSpecification: [
           {
             "@type": "OpeningHoursSpecification",
@@ -104,13 +107,14 @@ export function buildFAQPageSchema(faq: FaqItem[], name?: string) {
   };
 }
 
-/** MedicalProcedure / Service – hizmet detay sayfası */
+/** MedicalProcedure / Service – hizmet detay sayfası (yerel SEO: provider + location) */
 export function buildServiceSchema(service: {
   title: string;
   excerpt: string;
   slug: string;
-}) {
+}, options?: { phone?: string; address?: string }) {
   const base = getBaseUrl();
+  const telephone = options?.phone?.replace(/\s/g, "");
   return {
     "@context": "https://schema.org",
     "@type": "MedicalProcedure",
@@ -118,6 +122,36 @@ export function buildServiceSchema(service: {
     description: service.excerpt,
     url: `${base}/hizmetler/${service.slug}`,
     procedureType: "Minimally invasive",
+    ...(telephone
+      ? {
+          provider: {
+            "@type": "Physician",
+            name: "Uzm. Dr. Doğukan Atabay",
+            medicalSpecialty: "Girişimsel Radyoloji",
+            worksFor: {
+              "@type": "MedicalBusiness",
+              name: "Özel İmperial Hastanesi",
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Ortahisar",
+                addressRegion: "Trabzon",
+                streetAddress: options?.address ?? "Kemerkaya, İller Sk. 27-29",
+                addressCountry: "TR",
+              },
+            },
+          },
+          location: {
+            "@type": "Place",
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Ortahisar",
+              addressRegion: "Trabzon",
+              addressCountry: "TR",
+            },
+          },
+          areaServed: { "@type": "City", name: "Trabzon", addressCountry: "TR" },
+        }
+      : {}),
   };
 }
 
