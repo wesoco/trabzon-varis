@@ -1,0 +1,17 @@
+services:
+  web:
+    build:
+      context: ./next-site
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=file:/app/data/dev.db
+    volumes:
+      # SQLite veritabanını kalıcı tutar
+      - app-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  app-data:
