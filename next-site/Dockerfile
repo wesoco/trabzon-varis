@@ -1,21 +1,21 @@
-# Coolify/repo root'tan build için: context = . (root), uygulama next-site içinde
 # ========== Stage 1: Dependencies ==========
 FROM node:20-alpine AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# next-site package dosyaları (package-lock sunucuda yoksa sadece package.json)
-COPY next-site/package*.json ./
+# package*.json = package.json + package-lock.json (lock sunucuda yoksa sadece package.json kopyalanır)
+COPY package*.json ./
 RUN if [ -f package-lock.json ]; then npm ci; else npm install; fi
 
 # ========== Stage 2: Builder ==========
 FROM node:20-alpine AS builder
 WORKDIR /app
 
+# better-sqlite3 için build dependency
 RUN apk add --no-cache python3 make g++
 
 COPY --from=deps /app/node_modules ./node_modules
-COPY next-site/ .
+COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV DATABASE_URL="file:./prisma/dev.db"
@@ -33,6 +33,7 @@ ENV NEXT_TELEMETRY_DISABLED=1
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
+# Veritabanı için kalıcı dizin
 RUN mkdir -p /app/data /app/prisma && chown -R nextjs:nodejs /app/data /app/prisma
 
 COPY --from=builder /app/public ./public
